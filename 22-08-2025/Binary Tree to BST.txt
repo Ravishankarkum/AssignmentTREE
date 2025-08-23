@@ -1,0 +1,27 @@
+class Solution {
+    public void inorder(Node root, ArrayList<Integer> res){
+        if(root==null) return;
+        inorder(root.left,res);
+        res.add(root.data);
+        inorder(root.right,res);
+    }
+    public void sorted(Node root,ArrayList<Integer> res,int[] index){
+        if(root==null){
+            return;
+        }
+        sorted(root.left,res,index);
+        root.data=res.get(index[0]);
+        index[0]++;
+        sorted(root.right,res,index);
+    }
+    Node binaryTreeToBST(Node root) {
+        ArrayList<Integer> res=new ArrayList<>();
+        inorder(root,res);
+        Collections.sort(res);
+        sorted(root,res,new int[]{0});
+        return root;
+        
+        
+        
+    }
+}
